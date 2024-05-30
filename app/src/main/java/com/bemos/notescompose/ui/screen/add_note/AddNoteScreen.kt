@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.bemos.notescompose.ui.screen.notes.vm.NoteViewModelFactory
 import com.bemos.notescompose.ui.screen.notes.vm.NotesViewModel
 
 @Composable
@@ -15,11 +16,7 @@ fun AddNoteScreen(
     val context = LocalContext.current
 
     val viewModel = viewModel<NotesViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return NotesViewModel(context) as T
-            }
-        }
+        factory = NoteViewModelFactory(context)
     )
     
     AddNoteContent(
@@ -27,7 +24,6 @@ fun AddNoteScreen(
             viewModel.insertNote(note)
 
             navController.popBackStack()
-            navController.navigate("notes")
         }
     )
 }

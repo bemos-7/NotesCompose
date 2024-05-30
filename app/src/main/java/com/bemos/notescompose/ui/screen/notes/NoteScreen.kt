@@ -1,58 +1,29 @@
 package com.bemos.notescompose.ui.screen.notes
 
-import android.app.Application
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.currentComposer
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.bemos.notescompose.ui.database.entity.NoteModel
+import com.bemos.notescompose.ui.screen.notes.vm.NoteViewModelFactory
 import com.bemos.notescompose.ui.screen.notes.vm.NotesViewModel
 
 @Composable
 fun NoteScreen(
     navController: NavController
 ) {
-
     val context = LocalContext.current
-
     val viewModel = viewModel<NotesViewModel>(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return NotesViewModel(context) as T
-            }
-        }
+        factory = NoteViewModelFactory(context)
     )
 
-    val noteState = remember {
-        mutableStateOf<List<NoteModel>>(emptyList())
-    }
-    
-//    LaunchedEffect(viewModel) {
-//        viewModel.getAllNotes().observeForever {
-//            noteState.value = it
-//        }
-//    }
-
-    viewModel.getAllNotes().observeForever {
-        noteState.value = it
-    }
+    val notes by viewModel.allNote.collectAsState()
     
     NotesContent(
-        listNote = noteState.value,
+        listNote = notes,
         onClick = {
-            if (it) {
-                navController.popBackStack()
-                navController.navigate("addNote")
-            }
+            navController.navigate("addNote")
         }
     )
-
 }

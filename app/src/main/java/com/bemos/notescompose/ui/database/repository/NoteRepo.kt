@@ -1,18 +1,18 @@
 package com.bemos.notescompose.ui.database.repository
 
-import androidx.lifecycle.LiveData
-import com.bemos.notescompose.ui.database.dao.NoteDao
-import com.bemos.notescompose.ui.database.entity.NoteModel
+import com.bemos.notescompose.ui.database.room.NoteDao
+import com.bemos.notescompose.ui.database.model.NoteEntity
+import kotlinx.coroutines.flow.Flow
 
 class NoteRepo(
     private val noteDao: NoteDao
 ) : NoteRepository {
 
-    override fun getAllNotes(): LiveData<List<NoteModel>> {
+    override fun getAllNotes(): Flow<List<NoteEntity>> {
         return noteDao.getAllNotes()
     }
 
-    override fun insert(note: NoteModel) {
+    override suspend fun insert(note: NoteEntity) {
         return noteDao.insert(note)
     }
 

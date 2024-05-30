@@ -68,11 +68,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation ("androidx.room:room-runtime:2.5.0") // Библиотека "Room"
-    kapt ("androidx.room:room-compiler:2.5.0") // Кодогенератор
-    implementation ("androidx.room:room-ktx:2.5.0") // Дополнительно для Kotlin Coroutines, Kotlin Flows
+    implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
+    kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
+    implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows
 
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
