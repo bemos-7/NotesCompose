@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bemos.data.database.entity.NoteModel
+import com.bemos.domain.model.Note
 
 @Composable
-fun NoteItem(item: com.bemos.data.database.entity.NoteModel) {
+fun NoteItem(item: Note) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
