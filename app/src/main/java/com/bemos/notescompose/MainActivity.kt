@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.bemos.notescompose.ui.screen.add_note.AddNoteScreen
-import com.bemos.notescompose.ui.screen.notes.NoteScreen
+import com.bemos.notescompose.ui.presentation.screen.add_note.AddNoteScreen
+import com.bemos.notescompose.ui.presentation.screen.notes.NoteScreen
 import com.bemos.notescompose.ui.theme.NotesComposeTheme
 
 class MainActivity : ComponentActivity() {

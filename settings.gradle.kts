@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "NotesCompose"
 include(":app")
- 
+include(":data")
+include(":domain")
