@@ -1,4 +1,4 @@
-package com.bemos.notescompose
+package com.bemos.notescompose.ui.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
