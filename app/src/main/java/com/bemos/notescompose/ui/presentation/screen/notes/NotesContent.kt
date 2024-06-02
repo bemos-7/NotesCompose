@@ -23,7 +23,8 @@ import com.bemos.notescompose.ui.presentation.screen.notes.adapter.NoteItem
 @Composable
 fun NotesContent(
     listNote: List<Note>,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onClickItem: (Int) -> Unit
 ) {
     Column(
         Modifier
@@ -35,7 +36,7 @@ fun NotesContent(
             Modifier.fillMaxWidth()
         ) {
             items(items = listNote) {
-                NoteItem(item = it)
+                NoteItem(item = it, onClickItem)
             }
             item {
                 Icon(
@@ -77,6 +78,7 @@ fun NotesContentPreview() {
 
     NotesContent(
         list,
-        onClick = {}
+        onClick = {},
+        onClickItem = {}
     )
 }

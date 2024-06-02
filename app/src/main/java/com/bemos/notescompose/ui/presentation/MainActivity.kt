@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bemos.notescompose.ui.presentation.screen.add_note.AddNoteScreen
+import com.bemos.notescompose.ui.presentation.screen.note_details.NoteDetailsScreen
+import com.bemos.notescompose.ui.presentation.screen.note_details.vm.NoteDetailsItemViewModel
 import com.bemos.notescompose.ui.presentation.screen.notes.NoteScreen
 import com.bemos.notescompose.ui.theme.NotesComposeTheme
 
@@ -19,6 +22,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+
+            val viewModelItem = viewModel<NoteDetailsItemViewModel>()
 
             NotesComposeTheme {
                 Surface(
@@ -32,13 +37,25 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = "notes"
                         ) {
-                            NoteScreen(navController = navController)
+                            NoteScreen(
+                                navController = navController,
+                                viewModelItem = viewModelItem
+                            )
                         }
                         
                         composable(
                             route = "addNote"
                         ) {
                             AddNoteScreen(navController = navController)
+                        }
+
+                        composable(
+                            route = "noteDetails"
+                        ) {
+                            NoteDetailsScreen(
+                                navController = navController,
+                                viewModelItem = viewModelItem
+                            )
                         }
                     }
                 }

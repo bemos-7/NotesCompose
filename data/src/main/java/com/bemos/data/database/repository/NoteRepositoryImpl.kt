@@ -23,6 +23,12 @@ class NoteRepositoryImpl(
 
     }
 
+    override fun getNoteById(noteId: Int): Flow<Note> {
+        return noteDao.getNoteById(noteId).map {
+            it.toDomain()
+        }
+    }
+
     override suspend fun insert(note: Note) {
         return noteDao.insert(note.toEntity())
     }
