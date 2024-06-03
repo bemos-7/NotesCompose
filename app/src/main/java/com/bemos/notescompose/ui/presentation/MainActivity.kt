@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.bemos.notescompose.ui.presentation.screen.add_note.AddNoteScreen
 import com.bemos.notescompose.ui.presentation.screen.note_details.NoteDetailsScreen
 import com.bemos.notescompose.ui.presentation.screen.note_details.vm.NoteDetailsItemViewModel
+import com.bemos.notescompose.ui.presentation.screen.note_details.vm.factory.NoteDetailsItemViewModelFactory
 import com.bemos.notescompose.ui.presentation.screen.notes.NoteScreen
 import com.bemos.notescompose.ui.theme.NotesComposeTheme
 
@@ -23,7 +24,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            val viewModelItem = viewModel<NoteDetailsItemViewModel>()
+            val viewModelItem = viewModel<NoteDetailsItemViewModel>(
+                factory = NoteDetailsItemViewModelFactory()
+            )
 
             NotesComposeTheme {
                 Surface(
