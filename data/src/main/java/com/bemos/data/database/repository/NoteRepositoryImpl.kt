@@ -33,6 +33,10 @@ class NoteRepositoryImpl(
         return noteDao.insert(note.toEntity())
     }
 
+    override suspend fun delete(note: Note) {
+        return noteDao.delete(note.toEntity())
+    }
+
 //    private fun mapToDomain(noteEntity: NoteEntity) : Note {
 //        return Note(
 //            noteEntity.id,

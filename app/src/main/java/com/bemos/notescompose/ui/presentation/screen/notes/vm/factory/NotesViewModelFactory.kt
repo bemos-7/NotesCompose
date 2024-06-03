@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bemos.data.database.db.NoteDatabase
 import com.bemos.data.database.repository.NoteRepositoryImpl
+import com.bemos.domain.usecases.DeleteNoteUseCase
 import com.bemos.domain.usecases.GetAllNotesUseCase
 import com.bemos.notescompose.ui.presentation.screen.notes.vm.NotesViewModel
 
@@ -23,9 +24,13 @@ class NotesViewModelFactory(
     private val getAllNoteUseCase by lazy {
         com.bemos.domain.usecases.GetAllNotesUseCase(repository)
     }
+    private val deleteNoteUseCase by lazy {
+        DeleteNoteUseCase(repository)
+    }
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return NotesViewModel(
-            getAllNotesUseCase =  getAllNoteUseCase
+            getAllNotesUseCase =  getAllNoteUseCase,
+            deleteNoteUseCase = deleteNoteUseCase
         ) as T
     }
 

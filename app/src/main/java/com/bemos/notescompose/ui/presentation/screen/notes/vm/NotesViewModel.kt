@@ -3,12 +3,14 @@ package com.bemos.notescompose.ui.presentation.screen.notes.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bemos.domain.model.Note
+import com.bemos.domain.usecases.DeleteNoteUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class NotesViewModel(
-    private val getAllNotesUseCase: com.bemos.domain.usecases.GetAllNotesUseCase
+    private val getAllNotesUseCase: com.bemos.domain.usecases.GetAllNotesUseCase,
+    private val deleteNoteUseCase: DeleteNoteUseCase
 ): ViewModel() {
 
     val allNote: MutableStateFlow<List<Note>> = MutableStateFlow(emptyList())
@@ -21,6 +23,12 @@ class NotesViewModel(
                         note
                     }
                 }
+        }
+    }
+
+    fun deleteNote(note: Note) {
+        viewModelScope.launch {
+            deleteNoteUseCase.execute(note)
         }
     }
 
