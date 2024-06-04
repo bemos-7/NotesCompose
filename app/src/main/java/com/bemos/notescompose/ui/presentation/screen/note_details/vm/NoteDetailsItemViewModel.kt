@@ -11,8 +11,6 @@ class NoteDetailsItemViewModel(
 
     val itemId = MutableStateFlow(0)
 
-    // FIXME:
-    // make the useCase
     fun updateId(id: Int) {
         val newId = updateItemIdUseCase.execute(id)
         itemId.update {

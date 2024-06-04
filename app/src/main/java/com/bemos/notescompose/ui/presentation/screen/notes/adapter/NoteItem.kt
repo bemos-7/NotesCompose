@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bemos.domain.model.Note
@@ -68,7 +69,7 @@ fun NoteItem(item: Note, onClick: (Int) -> Unit, onLongClick: (Note) -> Unit) {
             Text(
                 text = item.title,
                 fontSize = 20.sp,
-                color = Color.Black
+                fontWeight = FontWeight.Bold
             )
             
             Spacer(modifier = Modifier

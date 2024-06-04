@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bemos.data.database.db.NoteDatabase
 import com.bemos.data.database.repository.NoteRepositoryImpl
 import com.bemos.domain.usecases.GetNoteByIdUseCase
+import com.bemos.domain.usecases.UpdateItemIdUseCase
 import com.bemos.notescompose.ui.presentation.screen.note_details.vm.NoteDetailsViewModel
 
 class NoteDetailsViewModelFactory(
@@ -23,9 +24,10 @@ class NoteDetailsViewModelFactory(
     private val getNoteByIdUseCase by lazy {
         GetNoteByIdUseCase(repository)
     }
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return NoteDetailsViewModel(
-            getNoteByIdUseCase
+            getNoteByIdUseCase = getNoteByIdUseCase
         ) as T
     }
 

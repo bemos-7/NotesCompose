@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.bemos.domain.model.Note
+import com.bemos.notescompose.ui.presentation.screen.add_note.vm.AddNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.note_details.vm.NoteDetailsItemViewModel
 import com.bemos.notescompose.ui.presentation.screen.notes.vm.NotesViewModel
 import com.bemos.notescompose.ui.presentation.screen.notes.vm.factory.NotesViewModelFactory
@@ -28,7 +29,8 @@ import com.bemos.notescompose.ui.presentation.screen.notes.vm.factory.NotesViewM
 @Composable
 fun NoteScreen(
     navController: NavController,
-    viewModelItem: NoteDetailsItemViewModel = viewModel()
+    viewModelItem: NoteDetailsItemViewModel = viewModel(),
+    viewModelNote: AddNoteViewModel = viewModel()
 ) {
 
     val context = LocalContext.current
@@ -46,6 +48,15 @@ fun NoteScreen(
     }
 
     val deleteNote = remember {
+        mutableStateOf(
+            Note(
+                title = "",
+                description = ""
+            )
+        )
+    }
+
+    val updateNote = remember {
         mutableStateOf(
             Note(
                 title = "",
@@ -74,6 +85,9 @@ fun NoteScreen(
                 TextButton(
                     onClick = {
                         openAlertDialog.value = false
+
+                        viewModelNote.updateNoteItem(updateNote.value)
+                        navController.navigate("addNote")
                     }
                 ) {
                     Text(text = "Изменить")
@@ -95,6 +109,8 @@ fun NoteScreen(
         onLongClickItem = {
             openAlertDialog.value = true
             deleteNote.value = it
+            updateNote.value = it
+            Log.d("itemSaveTest", updateNote.value.title)
         }
     )
 }
