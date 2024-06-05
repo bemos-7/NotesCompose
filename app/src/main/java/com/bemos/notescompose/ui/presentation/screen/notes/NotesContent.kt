@@ -25,7 +25,7 @@ fun NotesContent(
     listNote: List<Note>,
     onClick: () -> Unit,
     onClickItem: (Int) -> Unit,
-    onLongClickItem: (Note) -> Unit
+    onLongClickItem: (Note, Int) -> Unit
 ) {
     Column(
         Modifier
@@ -81,6 +81,8 @@ fun NotesContentPreview() {
         list,
         onClick = {},
         onClickItem = {},
-        onLongClickItem = {}
+        onLongClickItem = { note, id ->
+
+        }
     )
 }

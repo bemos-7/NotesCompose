@@ -45,13 +45,15 @@ import com.bemos.notescompose.ui.theme.NotesComposeTheme
 fun AddNoteContent(
     onClick: (Note) -> Unit,
     backOnClick: () -> Unit,
+    titleU: String,
+    descriptionU: String
 ) {
     var title by remember {
-        mutableStateOf("")
+        mutableStateOf(titleU)
     }
 
     var description by remember {
-        mutableStateOf("")
+        mutableStateOf(descriptionU)
     }
 
     var note by remember {
@@ -148,6 +150,8 @@ fun AddNoteContentPreview() {
         AddNoteContent(
             onClick = {},
             backOnClick = {},
+            "",
+            ""
         )
     }
 }

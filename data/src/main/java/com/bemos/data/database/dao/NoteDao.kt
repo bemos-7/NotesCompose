@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
 import com.bemos.data.database.model.NoteEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -23,7 +22,10 @@ interface NoteDao {
     @Delete
     suspend fun delete(note: NoteEntity)
 
-    @Update
-    suspend fun update(note: NoteEntity)
+    @Query("UPDATE notes SET title = :newTitle WHERE id = :id")
+    suspend fun updateNoteTitle(id: Int, newTitle: String)
+
+    @Query("UPDATE notes SET description = :newDescription WHERE id = :id")
+    suspend fun updateNoteDescription(id: Int, newDescription: String)
 
 }

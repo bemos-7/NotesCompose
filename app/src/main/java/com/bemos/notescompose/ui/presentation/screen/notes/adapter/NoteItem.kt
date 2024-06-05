@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NoteItem(item: Note, onClick: (Int) -> Unit, onLongClick: (Note) -> Unit) {
+fun NoteItem(item: Note, onClick: (Int) -> Unit, onLongClick: (Note, Int) -> Unit) {
 
     var id by remember {
         mutableStateOf(0)
@@ -59,7 +59,7 @@ fun NoteItem(item: Note, onClick: (Int) -> Unit, onLongClick: (Note) -> Unit) {
                         item.title,
                         item.description
                     )
-                    onLongClick(note)
+                    onLongClick(note, note.id!!)
                 }
             )
     ) {

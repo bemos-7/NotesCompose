@@ -12,6 +12,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -21,6 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.bemos.domain.model.Note
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.AddNoteViewModel
+import com.bemos.notescompose.ui.presentation.screen.add_note.vm.IntentNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.note_details.vm.NoteDetailsItemViewModel
 import com.bemos.notescompose.ui.presentation.screen.notes.vm.NotesViewModel
 import com.bemos.notescompose.ui.presentation.screen.notes.vm.factory.NotesViewModelFactory
@@ -30,7 +32,7 @@ import com.bemos.notescompose.ui.presentation.screen.notes.vm.factory.NotesViewM
 fun NoteScreen(
     navController: NavController,
     viewModelItem: NoteDetailsItemViewModel = viewModel(),
-    viewModelNote: AddNoteViewModel = viewModel()
+    intentNoteViewModel: IntentNoteViewModel = viewModel()
 ) {
 
     val context = LocalContext.current
@@ -56,7 +58,11 @@ fun NoteScreen(
         )
     }
 
-    val updateNote = remember {
+    val updateNoteId = remember {
+        mutableIntStateOf(-1)
+    }
+
+    val updateNoteItem = remember {
         mutableStateOf(
             Note(
                 title = "",
@@ -85,8 +91,8 @@ fun NoteScreen(
                 TextButton(
                     onClick = {
                         openAlertDialog.value = false
-
-                        viewModelNote.updateNoteItem(updateNote.value)
+                        intentNoteViewModel.updateNoteId(updateNoteId.value)
+                        intentNoteViewModel.updateNoteItem(updateNoteItem.value)
                         navController.navigate("addNote")
                     }
                 ) {
@@ -103,14 +109,13 @@ fun NoteScreen(
         },
         onClickItem = {
             viewModelItem.updateId(it)
-            Log.d("NoteItem", viewModelItem.itemId.value.toString())
             navController.navigate("noteDetails")
         },
-        onLongClickItem = {
+        onLongClickItem = { note, id ->
             openAlertDialog.value = true
-            deleteNote.value = it
-            updateNote.value = it
-            Log.d("itemSaveTest", updateNote.value.title)
+            deleteNote.value = note
+            updateNoteId.value = id
+            updateNoteItem.value = note
         }
     )
 }

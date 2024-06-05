@@ -13,6 +13,8 @@ interface NoteRepository {
 
     suspend fun delete(note: Note)
 
-    suspend fun update(note: Note)
+    suspend fun updateNoteTitle(id: Int, newTitle: String)
+
+    suspend fun updateNoteDescription(id: Int, newDescription: String)
 
 }

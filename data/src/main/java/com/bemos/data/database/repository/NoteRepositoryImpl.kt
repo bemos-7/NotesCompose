@@ -37,9 +37,14 @@ class NoteRepositoryImpl(
         return noteDao.delete(note.toEntity())
     }
 
-    override suspend fun update(note: Note) {
-        return noteDao.update(note.toEntity())
+    override suspend fun updateNoteTitle(id: Int, newTitle: String) {
+        return noteDao.updateNoteTitle(id, newTitle)
     }
+
+    override suspend fun updateNoteDescription(id: Int, newDescription: String) {
+        return noteDao.updateNoteDescription(id, newDescription)
+    }
+
 
 //    private fun mapToDomain(noteEntity: NoteEntity) : Note {
 //        return Note(
