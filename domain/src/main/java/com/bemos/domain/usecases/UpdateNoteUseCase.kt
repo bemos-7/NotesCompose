@@ -13,7 +13,7 @@ class UpdateNoteUseCase(
     }
 
     suspend fun executeUpdateDesc(id: Int, newDescription: String) {
-        return repository.updateNoteTitle(id, newDescription)
+        return repository.updateNoteDescription(id, newDescription)
     }
 
 }

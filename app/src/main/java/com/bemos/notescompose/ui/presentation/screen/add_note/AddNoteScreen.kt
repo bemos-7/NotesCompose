@@ -51,12 +51,9 @@ fun AddNoteScreen(
         }
     }
 
-    isDebugInspectorInfoEnabled
-
     AddNoteContent(
         onClick = { note ->
             if (noteBool.value) {
-
                 Log.d("noteBollTrue", note.title)
                 Log.d("noteBollTrue", noteId.value.toString())
                 viewModel.updateNoteTitle(noteId.value, note.title)
