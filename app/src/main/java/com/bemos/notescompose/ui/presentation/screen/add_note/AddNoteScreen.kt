@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.bemos.domain.model.Note
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.AddNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.IntentNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.factory.AddNoteViewModelFactory
@@ -54,10 +55,16 @@ fun AddNoteScreen(
     AddNoteContent(
         onClick = { note ->
             if (noteBool.value) {
-                Log.d("noteBollTrue", note.title)
-                Log.d("noteBollTrue", noteId.value.toString())
                 viewModel.updateNoteTitle(noteId.value, note.title)
                 viewModel.updateNoteDescription(noteId.value, note.description)
+                noteBool.value = false
+                intentNoteViewModel.updateNoteId(-1)
+                intentNoteViewModel.updateNoteItem(
+                    Note(
+                        title = "",
+                        description = ""
+                    )
+                )
             } else {
                 viewModel.insertNote(note)
             }
@@ -65,6 +72,14 @@ fun AddNoteScreen(
         },
         backOnClick = {
             navController.navigate("notes")
+            noteBool.value = false
+            intentNoteViewModel.updateNoteId(-1)
+            intentNoteViewModel.updateNoteItem(
+                Note(
+                    title = "",
+                    description = ""
+                )
+            )
         },
         titleU = title.value,
         descriptionU = description.value

@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NoteItem(item: Note, onClick: (Int) -> Unit, onLongClick: (Note, Int) -> Unit) {
+fun NoteItem(item: Note, onClick: (Int, Note) -> Unit, onLongClick: (Note) -> Unit) {
 
     var id by remember {
         mutableStateOf(0)
@@ -44,14 +44,21 @@ fun NoteItem(item: Note, onClick: (Int) -> Unit, onLongClick: (Note, Int) -> Uni
     }
 
     Card(
-
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 15.dp)
             .combinedClickable(
                 onClick = {
+                    note = Note(
+                        item.id,
+                        item.title,
+                        item.description
+                    )
                     id = item.id!!
-                    onClick(id)
+                    onClick(
+                        id,
+                        note
+                    )
                 },
                 onLongClick = {
                     note = Note(
@@ -59,7 +66,7 @@ fun NoteItem(item: Note, onClick: (Int) -> Unit, onLongClick: (Note, Int) -> Uni
                         item.title,
                         item.description
                     )
-                    onLongClick(note, note.id!!)
+                    onLongClick(note)
                 }
             )
     ) {

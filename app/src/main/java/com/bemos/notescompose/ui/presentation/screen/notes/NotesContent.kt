@@ -8,11 +8,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,8 +27,8 @@ import com.bemos.notescompose.ui.presentation.screen.notes.adapter.NoteItem
 fun NotesContent(
     listNote: List<Note>,
     onClick: () -> Unit,
-    onClickItem: (Int) -> Unit,
-    onLongClickItem: (Note, Int) -> Unit
+    onClickItem: (Int, Note) -> Unit,
+    onLongClickItem: (Note) -> Unit
 ) {
     Column(
         Modifier
@@ -40,19 +43,23 @@ fun NotesContent(
                 NoteItem(item = it, onClickItem, onLongClickItem)
             }
             item {
-                Icon(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .size(50.dp)
-                        .clickable {
-                            onClick()
-                        }
-                        .align(Alignment.CenterHorizontally),
+                Column(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                onClick()
+                            }
+                            .align(Alignment.CenterHorizontally),
 
-                    tint = MaterialTheme.colorScheme.primary,
-                    painter = painterResource(id = R.drawable.baseline_add_circle_24),
-                    contentDescription = "plus",
-                )
+                        tint = MaterialTheme.colorScheme.primary,
+                        painter = painterResource(id = R.drawable.baseline_add_circle_24),
+                        contentDescription = "plus",
+                    )
+                }
             }
         }
     }
@@ -80,9 +87,7 @@ fun NotesContentPreview() {
     NotesContent(
         list,
         onClick = {},
-        onClickItem = {},
-        onLongClickItem = { note, id ->
-
-        }
+        onClickItem = { id, note ->  },
+        onLongClickItem = {}
     )
 }

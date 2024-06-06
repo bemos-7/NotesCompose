@@ -68,7 +68,25 @@ class MainActivity : ComponentActivity() {
                         }
                         
                         composable(
-                            route = "addNote"
+                            route = "addNote",
+                            enterTransition = {
+                                slideInVertically(
+                                    initialOffsetY = { it },
+                                    animationSpec = tween(
+                                        durationMillis = 500,
+                                        easing = LinearOutSlowInEasing
+                                    )
+                                )
+                            },
+                            exitTransition = {
+                                slideOutVertically(
+                                    targetOffsetY = { it },
+                                    animationSpec = tween(
+                                        durationMillis = 500,
+                                        easing = LinearOutSlowInEasing
+                                    )
+                                )
+                            }
                         ) {
                             AddNoteScreen(
                                 navController = navController,

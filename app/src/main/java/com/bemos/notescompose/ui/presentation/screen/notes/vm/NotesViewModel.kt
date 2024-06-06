@@ -1,5 +1,9 @@
 package com.bemos.notescompose.ui.presentation.screen.notes.vm
 
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bemos.domain.model.Note
@@ -31,5 +35,4 @@ class NotesViewModel(
             deleteNoteUseCase.execute(note)
         }
     }
-
 }

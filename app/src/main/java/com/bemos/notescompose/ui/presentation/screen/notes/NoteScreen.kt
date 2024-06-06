@@ -76,27 +76,15 @@ fun NoteScreen(
     if (openAlertDialog.value) {
         AlertDialog(
             onDismissRequest = { openAlertDialog.value = false },
-            title = { Text(text = "Выберите действие") },
+            title = { Text(text = "Подтверждения действия") },
+            text = { Text(text = "Вы действительно хотите удалить выбранный элемент") },
             confirmButton = {
                 TextButton(onClick = {
                         openAlertDialog.value = false
-
                         viewModel.deleteNote(deleteNote.value)
                     }
                 ) {
                     Text(text = "Удалить")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        openAlertDialog.value = false
-                        intentNoteViewModel.updateNoteId(updateNoteId.value)
-                        intentNoteViewModel.updateNoteItem(updateNoteItem.value)
-                        navController.navigate("addNote")
-                    }
-                ) {
-                    Text(text = "Изменить")
                 }
             }
         )
@@ -107,15 +95,17 @@ fun NoteScreen(
         onClick = {
             navController.navigate("addNote")
         },
-        onClickItem = {
-            viewModelItem.updateId(it)
-            navController.navigate("noteDetails")
-        },
-        onLongClickItem = { note, id ->
-            openAlertDialog.value = true
-            deleteNote.value = note
+        onClickItem = { id, note ->
+            viewModelItem.updateId(id)
             updateNoteId.value = id
             updateNoteItem.value = note
+            intentNoteViewModel.updateNoteId(updateNoteId.value)
+            intentNoteViewModel.updateNoteItem(updateNoteItem.value)
+            navController.navigate("addNote")
+        },
+        onLongClickItem = { note ->
+            openAlertDialog.value = true
+            deleteNote.value = note
         }
     )
 }
