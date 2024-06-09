@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.bemos.notescompose.ui.app.App
 import com.bemos.notescompose.ui.presentation.screen.add_note.AddNoteScreen
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.AddNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.IntentNoteViewModel
@@ -34,11 +35,23 @@ import com.bemos.notescompose.ui.presentation.screen.note_details.NoteDetailsScr
 import com.bemos.notescompose.ui.presentation.screen.note_details.vm.NoteDetailsItemViewModel
 import com.bemos.notescompose.ui.presentation.screen.note_details.vm.factory.NoteDetailsItemViewModelFactory
 import com.bemos.notescompose.ui.presentation.screen.notes.NoteScreen
+import com.bemos.notescompose.ui.presentation.screen.notes.vm.factory.NotesViewModelFactory
 import com.bemos.notescompose.ui.theme.NotesComposeTheme
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var notesViewModelFactory: NotesViewModelFactory
+
+    @Inject
+    lateinit var addNoteViewModelFactory: AddNoteViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        (applicationContext as App).appComponent.inject(this)
+
         setContent {
             val navController = rememberNavController()
 
@@ -63,7 +76,8 @@ class MainActivity : ComponentActivity() {
                             NoteScreen(
                                 navController = navController,
                                 viewModelItem = viewModelItem,
-                                intentNoteViewModel = intentViewModel
+                                intentNoteViewModel = intentViewModel,
+                                notesViewModelFactory = notesViewModelFactory
                             )
                         }
                         
@@ -90,7 +104,8 @@ class MainActivity : ComponentActivity() {
                         ) {
                             AddNoteScreen(
                                 navController = navController,
-                                intentNoteViewModel = intentViewModel
+                                intentNoteViewModel = intentViewModel,
+                                addNoteViewModelFactory = addNoteViewModelFactory
                             )
                         }
 
