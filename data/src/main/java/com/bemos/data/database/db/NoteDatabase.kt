@@ -11,7 +11,7 @@ import com.bemos.data.database.model.NoteEntity
     entities = [NoteEntity::class],
     version = 1
 )
-abstract class NoteDatabase() : RoomDatabase() {
+abstract class NoteDatabase: RoomDatabase() {
     abstract fun getDao(): NoteDao
 
     companion object {

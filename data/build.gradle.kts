@@ -26,6 +26,10 @@ dependencies {
 
     implementation(project(":domain"))
 
+    //Dagger
+    implementation ("com.google.dagger:dagger:2.51.1")
+    kapt ("com.google.dagger:dagger-compiler:2.51.1")
+
     implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
     kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
     implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows

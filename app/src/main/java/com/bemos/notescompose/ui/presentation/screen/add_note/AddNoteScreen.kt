@@ -1,35 +1,23 @@
 package com.bemos.notescompose.ui.presentation.screen.add_note
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.isDebugInspectorInfoEnabled
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+
 import androidx.navigation.NavController
 import com.bemos.domain.model.Note
-import com.bemos.notescompose.ui.app.App
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.AddNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.IntentNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.factory.AddNoteViewModelFactory
-import com.bemos.notescompose.ui.presentation.screen.notes.vm.NotesViewModel
-import javax.inject.Inject
 
 @Composable
 fun AddNoteScreen(
     navController: NavController,
     intentNoteViewModel: IntentNoteViewModel = viewModel(),
-    addNoteViewModelFactory: AddNoteViewModelFactory
+    viewModel: AddNoteViewModel = viewModel()
 ) {
-
-    val viewModel = viewModel<AddNoteViewModel>(
-        factory = addNoteViewModelFactory
-    )
 
     val title = remember {
         mutableStateOf("")

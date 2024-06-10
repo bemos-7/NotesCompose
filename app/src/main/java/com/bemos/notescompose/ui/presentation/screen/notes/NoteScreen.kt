@@ -26,12 +26,8 @@ fun NoteScreen(
     navController: NavController,
     viewModelItem: NoteDetailsItemViewModel = viewModel(),
     intentNoteViewModel: IntentNoteViewModel = viewModel(),
-    notesViewModelFactory: NotesViewModelFactory
+    notesViewModel: NotesViewModel = viewModel()
 ) {
-
-    val notesViewModel = viewModel<NotesViewModel>(
-        factory = notesViewModelFactory
-    )
 
     notesViewModel.getAllNotes()
 
