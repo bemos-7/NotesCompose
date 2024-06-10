@@ -1,6 +1,5 @@
 package com.bemos.notescompose.ui.di.modules
 
-import android.content.Context
 import com.bemos.domain.usecases.DeleteNoteUseCase
 import com.bemos.domain.usecases.GetAllNotesUseCase
 import com.bemos.domain.usecases.InsertNoteUseCase
@@ -11,14 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AppModule(
-    val context: Context
-) {
-
-    @Provides
-    fun provideContext() : Context {
-        return context
-    }
+class AppModule {
 
     @Provides
     fun provideAddNoteViewModelFactory(

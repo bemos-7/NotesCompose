@@ -19,19 +19,13 @@ import com.bemos.notescompose.ui.presentation.screen.note_details.vm.NoteDetails
 import com.bemos.notescompose.ui.presentation.screen.notes.vm.NotesViewModel
 import com.bemos.notescompose.ui.presentation.screen.notes.vm.factory.NotesViewModelFactory
 
-@OptIn(ExperimentalMaterial3Api::class)
-
 @Composable
 fun NoteScreen(
     navController: NavController,
     viewModelItem: NoteDetailsItemViewModel = viewModel(),
     intentNoteViewModel: IntentNoteViewModel = viewModel(),
-    notesViewModelFactory: NotesViewModelFactory
+    notesViewModel: NotesViewModel
 ) {
-
-    val notesViewModel = viewModel<NotesViewModel>(
-        factory = notesViewModelFactory
-    )
 
     notesViewModel.getAllNotes()
 

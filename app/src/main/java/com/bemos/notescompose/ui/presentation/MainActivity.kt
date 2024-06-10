@@ -27,6 +27,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bemos.notescompose.ui.app.App
+import com.bemos.notescompose.ui.di.appComponent
 import com.bemos.notescompose.ui.presentation.screen.add_note.AddNoteScreen
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.AddNoteViewModel
 import com.bemos.notescompose.ui.presentation.screen.add_note.vm.IntentNoteViewModel
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (applicationContext as App).appComponent.inject(this)
+        appComponent.inject(this)
 
         setContent {
             val navController = rememberNavController()
@@ -77,7 +78,9 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                                 viewModelItem = viewModelItem,
                                 intentNoteViewModel = intentViewModel,
-                                notesViewModelFactory = notesViewModelFactory
+                                notesViewModel = viewModel(
+                                    factory = notesViewModelFactory
+                                )
                             )
                         }
                         
