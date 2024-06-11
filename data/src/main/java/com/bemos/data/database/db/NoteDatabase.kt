@@ -14,14 +14,4 @@ import com.bemos.data.database.model.NoteEntity
 abstract class NoteDatabase: RoomDatabase() {
     abstract fun getDao(): NoteDao
 
-    companion object {
-        fun getDb(context: Context): NoteDatabase {
-            return Room.databaseBuilder(
-                context = context,
-                NoteDatabase::class.java,
-                "db"
-            ).build()
-        }
-    }
-
 }
